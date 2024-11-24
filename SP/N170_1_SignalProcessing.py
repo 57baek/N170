@@ -12,11 +12,18 @@ bids_root = "/Users/BAEK/Code/neurEx/data/N170/N170 Raw Data BIDS-Compatible V2"
 subjects = [sub for sub in os.listdir(bids_root) if sub.startswith('sub-')]
 task = 'N170'
 
-all_epochs = []
-all_labels = []
+#all_epochs = []
+#all_labels = []
+
+
+
 
 # TEST PURPOSE
-subjects = subjects[:1]
+subjects = subjects[:1] # TEST PURPOSE
+# TEST PURPOSE
+
+
+
 
 for subject in subjects:
     
@@ -112,26 +119,27 @@ for subject in subjects:
     
     epochs_clean.apply_baseline(baseline=baseline)
     
-    x = epochs_clean.get_data()  
-    y = epochs_clean.events[:, 2]
+    #x = epochs_clean.get_data()  
+    #y = epochs_clean.events[:, 2]
     
-    dataDir = '/Users/BAEK/Code/neurEx/N170/'
+    dataDir = '/Users/BAEK/Code/neurEx/data/N170'
     
     if not os.path.exists(dataDir + f'{subject}'):
         os.mkdir(dataDir + f'{subject}')
     
-    np.save(dataDir + f'{subject}/X_epochs_{subject}.npy', x)
-    np.save(dataDir + f'{subject}/Y_labels_{subject}.npy', y)
+    #np.save(dataDir + f'{subject}/X_epochs_{subject}.npy', x)
+    #np.save(dataDir + f'{subject}/Y_labels_{subject}.npy', y)
     
     epochs_clean.save(dataDir + f'{subject}/Epochs_{subject}.fif')
     
-    all_epochs.append(x)
-    all_labels.append(y)
+    #all_epochs.append(x)
+    #all_labels.append(y)
 
-print()
-print('***** Processing X and Y')
-print()    
+#print()
+#print('***** Processing X and Y')
+#print()    
 
+'''
 x = np.vstack(all_epochs)
 y = np.concatenate(all_labels)
 
@@ -149,5 +157,6 @@ y = y_resampled
 
 np.save('/Users/BAEK/Code/neurEx/N170/X_epochs_total.npy', x)
 np.save('/Users/BAEK/Code/neurEx/N170/Y_labels_total.npy', y)
+'''
 
 print("Preprocessing complete. Data is optimized for deep learning models.")
