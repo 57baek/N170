@@ -12,19 +12,6 @@ bids_root = "/Users/BAEK/Code/neurEx/data/N170/N170 Raw Data BIDS-Compatible V2"
 subjects = [sub for sub in os.listdir(bids_root) if sub.startswith('sub-')]
 task = 'N170'
 
-#all_epochs = []
-#all_labels = []
-
-
-
-
-# TEST PURPOSE
-subjects = subjects[:1] # TEST PURPOSE
-# TEST PURPOSE
-
-
-
-
 for subject in subjects:
     
     print()
@@ -119,44 +106,11 @@ for subject in subjects:
     
     epochs_clean.apply_baseline(baseline=baseline)
     
-    #x = epochs_clean.get_data()  
-    #y = epochs_clean.events[:, 2]
-    
     dataDir = '/Users/BAEK/Code/neurEx/data/N170'
     
     if not os.path.exists(dataDir + f'{subject}'):
         os.mkdir(dataDir + f'{subject}')
     
-    #np.save(dataDir + f'{subject}/X_epochs_{subject}.npy', x)
-    #np.save(dataDir + f'{subject}/Y_labels_{subject}.npy', y)
-    
     epochs_clean.save(dataDir + f'{subject}/Epochs_{subject}.fif')
-    
-    #all_epochs.append(x)
-    #all_labels.append(y)
-
-#print()
-#print('***** Processing X and Y')
-#print()    
-
-'''
-x = np.vstack(all_epochs)
-y = np.concatenate(all_labels)
-
-n_epochs, n_channels, n_times = x.shape
-x = x.reshape(n_epochs, -1)
-scaler = StandardScaler()
-x = scaler.fit_transform(x)
-x = x.reshape(n_epochs, n_channels, n_times)
-
-counter = Counter(y)
-ros = RandomOverSampler(random_state = 42)
-x_resampled, y_resampled = ros.fit_resample(x.reshape(n_epochs, -1), y)
-x = x_resampled.reshape(-1, n_channels, n_times)
-y = y_resampled
-
-np.save('/Users/BAEK/Code/neurEx/N170/X_epochs_total.npy', x)
-np.save('/Users/BAEK/Code/neurEx/N170/Y_labels_total.npy', y)
-'''
 
 print("Preprocessing complete. Data is optimized for deep learning models.")
