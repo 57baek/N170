@@ -204,7 +204,10 @@ history = model.fit(X_train_val,
                     verbose = 1)
 
 test_loss, test_accuracy = model.evaluate(X_test, y_test, verbose = 1)
-print(f'Test Accuracy: {test_accuracy * 100:.2f}%')
+
+print()
+print(f'***** Test Accuracy: {test_accuracy * 100:.2f}%')
+print()
 
 plt.figure(figsize = (12, 4))
 plt.subplot(1, 2, 1)
@@ -250,7 +253,11 @@ plt.savefig('figures/confusion_matrix.png')
 
 report = classification_report(y_test, y_pred, target_names=['Face', 'Car'])
 
-with open('classification_report.txt', 'w') as f:
+with open('figures/classification_report.txt', 'w') as f:
     f.write(report)
 
 model.save('figures/V2.tf')
+
+print()
+print('***** Batch Done. Have a nice day!')
+print()
